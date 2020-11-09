@@ -22,7 +22,7 @@ Parameters:
   DeveloperIPAddress:
     Type: String
     Description: Your public IP address (see http://checkip.dyndns.org/)
-    Default: 174.21.69.80
+    Default: 71.212.158.210
 #
   MasterUsername:
     Type: String
@@ -33,13 +33,12 @@ Parameters:
     Type: String
     Description: Master password for Redshift (used mixed case and numbers)
     NoEcho: true
-    Default: Password
+    Default: Password1
 
   DatabaseName:
     Type: String
     Description: Database name
     Default: dakobeddb
-
 
   DataBucketName:
     Type: String
@@ -65,7 +64,7 @@ Resources:
       MasterUserPassword: !Ref MasterUserPassword
       MasterUsername: !Ref MasterUsername
       PubliclyAccessible: true
-      NodeType: dc1.large
+      NodeType: dc2.large
       Port: 5439
       VpcSecurityGroupIds:
         - !Sub ${RedshiftSecurityGroup}
