@@ -13,14 +13,14 @@ then
     aws cloudformation deploy \
       --template-file package.yaml \
       --stack-name data-process-stack \
-      --capabilities CAPABILITY_IAM
+      --capabilities CAPABILITY_NAMED_IAM
 
 elif [[ $1 == 'local' ]]
 then
   aws  --endpoint-url=http://localhost:4566 cloudformation deploy \
       --template-file package.yaml \
       --stack-name data-process-stack \
-      --capabilities CAPABILITY_IAM
+      --capabilities CAPABILITY_NAMED_IAM
 else
     echo "choose either local or aws"
 fi
