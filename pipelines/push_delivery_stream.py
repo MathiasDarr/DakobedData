@@ -8,5 +8,5 @@ client = boto3.client("firehose")
 data = {"name":"ruhshan", "attributes":["lazy", "crazy"]}
 
 # Put record on the stream we created
-client.put_record(Record={"Data":json.dumps(data)}, DeliveryStreamName="data-process-stack-deliverystream-BeCp4w8z0m8E")
+client.put_record(Record={"Data":json.dumps(data)}, DeliveryStreamName="deliverystream")
 

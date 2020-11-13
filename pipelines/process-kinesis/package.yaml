@@ -6,6 +6,7 @@ Resources:
     - deliveryPolicy
     Type: AWS::KinesisFirehose::DeliveryStream
     Properties:
+      DeliveryStreamName: deliverystream
       ExtendedS3DestinationConfiguration:
         BucketARN:
           Fn::Join:

@@ -1,4 +1,3 @@
-
 AWSTemplateFormatVersion: 2010-09-09
 Description: Stack for Firehose DeliveryStream S3 Destination.
 Resources:
@@ -7,6 +6,7 @@ Resources:
       - deliveryPolicy
     Type: AWS::KinesisFirehose::DeliveryStream
     Properties:
+      DeliveryStreamName: deliverystream
       ExtendedS3DestinationConfiguration:
         BucketARN: !Join
           - ''
