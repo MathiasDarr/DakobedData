@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'process-kinesis
+
+  Sample SAM Template for process-kinesis
+
+  '
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    DependsOn:
+    - SNSTopicPolicy
+    Properties:
+      BucketName: firehose-s3
+      AccessControl: BucketOwnerFullControl
+      LifecycleConfiguration:
+        Rules:
+        - AbortIncompleteMultipartUpload:
+            DaysAfterInitiation: 3
+          NoncurrentVersionExpirationInDays: 3
+          Status: Enabled
+      NotificationConfiguration:
+        TopicConfigurations:
+        - Event: s3:ObjectCreated:Put
+          Topic:
+            Ref: SNSTopic
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags:
+      - Key: Description
+        Value: Object Storage
+      VersioningConfiguration:
+        Status: Enabled
+  DeveloperUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: user-developer
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/AWSServiceCatalogEndUserFullAccess
+      - arn:aws:iam::aws:policy/ReadOnlyAccess
+      - arn:aws:iam::aws:policy/CloudWatchFullAccess
+      - arn:aws:iam::aws:policy/AmazonVPCFullAccess
+      - arn:aws:iam::aws:policy/AmazonS3FullAccess
